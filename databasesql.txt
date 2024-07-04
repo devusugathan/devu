@@ -1,0 +1,32 @@
+CREATE TABLE adminlogin(a_id INT AUTO_INCREMENT,a_name VARCHAR(50) NOT NULL,a_password VARCHAR(50) NOT NULL,PRIMARY KEY(a_id));
+
+
+CREATE TABLE userlogin(u_id INT AUTO_INCREMENT,u_name VARCHAR(50) NOT NULL,u_password VARCHAR(50) NOT NULL,PRIMARY KEY(u_id));
+
+
+insert into adminlogin values(1,"Devu",SHA2("22ubc223",256)),(2,"Geethu",SHA2("22ubc262",256));
+
+
+GROOMING
+
+
+
+CREATE TABLE grooming(name VARCHAR(50) NOT NULL,phone INT(10) NOT NULL,breed VARCHAR(50) NOT NULL,g_date date not null,g_time INT(2) not null,PRIMARY KEY(phone));
+
+
+CREATE TABLE grooming(name VARCHAR(50) NOT NULL,phone INT NOT NULL,breed VARCHAR(50) NOT NULL,g_date date not null,g_time INT not null,PRIMARY KEY(phone));
+
+
+ALTER TABLE grooming ADD COLUMN status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending';
+
+
+ALTER TABLE grooming ADD COLUMN discription ENUM('waiting for confirmation', 'your request is accepted', 'your request is rejected,please change the date') DEFAULT 'waiting for confirmation';
+
+LOGIN
+
+CREATE TABLE login(l_id INT AUTO_INCREMENT,l_name VARCHAR(50) UNIQUE NOT NULL,l_password VARCHAR(50) UNIQUE NOT NULL,role VARCHAR(50) DEFAULT 'user',PRIMARY KEY(l_id));
+
+insert into login (l_name,l_password,role) values("Devu",SHA2("22ubc223",256),'admin');
+
+insert into login (l_name,l_password) values("Nithya",SHA2("22ubc263",256));
+
