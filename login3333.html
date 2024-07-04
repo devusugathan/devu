@@ -1,0 +1,40 @@
+﻿ <?php
+    include 'database.php';
+    if(isset($_POST['submit'])) {
+
+        $emailid = trim($_POST['id']);
+        $password = trim($_POST['pass']);
+        echo $emailid;
+        $sql = "SELECT * FROM login WHERE email = '$emailid'";  
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) 
+        {
+            $row = $result->fetch_assoc();
+            $hashed_password = $row['password'];
+            if (password_verify($password, $hashed_password))
+            {
+                session_start();
+                $_SESSION['id'] = $row['email'];
+                $_SESSION['role'] = $row['role'];
+                echo "<h2><center>login successful password verified</center></h2>";
+                if($row['role'] == 1) 
+                {
+                    echo "<h2><center>admin login successful</center></h2>";
+                } 
+                else 
+                {
+                    echo "<h2><center>user login successful</center></h2>";
+                }
+            } 
+            else 
+            {
+                echo "<h2><center>invalid login</center></h2>";
+            }
+        } 
+        else 
+        {
+            echo "<h2><center>No user found</center></h2>";
+        }
+        $conn->close();
+    }
+    ?>
